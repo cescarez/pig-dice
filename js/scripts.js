@@ -16,17 +16,17 @@ function Player() {
 //   tempTurnSum: 0,
 // }
 
-Player.prototype.checkRoll = function(currentRoll) {
+Player.prototype.checkRoll = function(currentRoll, turnSum) {
   if (currentRoll === 1) {
     this.tempTurnSum = 0;
     $("#sentence-output").text("You lose your turn points! " + currentRoll + " :(");
   } else {
-    this.tempTurnSum += currentRoll;
+    this.tempTurnSum = turnSum;
     console.log(this.tempTurnSum);
   }
 }
 
-Player.prototype.addTurntoHeld = function () {
+Player.prototype.addTurntoHeld = function() {
   this.totalHeldSum += this.tempTurnSum;
   if (this.totalHeldSum >= 100) {
     $("output-sentence").addClass("green").text("You're the winner!")
@@ -48,36 +48,36 @@ $(document).ready(function() {
     event.preventDefault();
     $("output-sentence").text="clear"
     var currentRoll = dice.randomRoll();
-
+    turnSum += currentRoll;
     if (currentPlayer === 1) {
       console.log("playerone");
       var playerOne = new Player();
       playerOne.currentRoll = currentRoll;
-      playerOne.checkRoll(playerOne.currentRoll);
+      playerOne.checkRoll(playerOne.currentRoll, turnSum);
       $("#output1").text(playerOne.currentRoll);
-      $("#turn-sum1").text("Player One Current Turn Sum: " + this.tempTurnSum);
+      $("#turn-sum1").text("Player One Current Turn Sum: " + playerOne.tempTurnSum);
       $("#turn-sum2").text("");
     } else if (currentPlayer === 2) {
       console.log("playerTwo");
       var playerTwo = new Player(playerTwo.currentRoll);
       playerTwo.currentRoll = currentRoll;
-      playerTwo.checkRoll(playerTwo.currentRoll);
+      playerTwo.checkRoll(playerTwo.currentRoll, turnSum);
       $("#output2").text(playerTwo.currentRoll);
-      $("#turn-sum2").text("Player Two Current Turn Sum: " + this.tempTurnSum);
+      $("#turn-sum2").text("Player Two Current Turn Sum: " + playerTwo.tempTurnSum);
       $("#turn-sum1").text("");
     } else if (currentPlayer % 2 !== 0) {
       console.log("playerone");
       playerOne.currentRoll = currentRoll;
-      playerOne.checkRoll(playerOne.currentRoll);
+      playerOne.checkRoll(playerOne.currentRoll, turnSum);
       $("#output1").text(playerOne.currentRoll);
-      $("#turn-sum1").text("Player One Current Turn Sum: " + this.tempTurnSum);
+      $("#turn-sum1").text("Player One Current Turn Sum: " + playerOne.tempTurnSum);
       $("#turn-sum2").text("");
     } else if (currentPlayer % 2 === 0) {
       console.log("playerTwo");
       playerTwo.currentRoll = currentRoll;
-      playerTwo.checkRoll(playerTwo.currentRoll);
+      playerTwo.checkRoll(playerTwo.currentRoll, turnSum);
       $("#output2").text(playerTwo.currentRoll);
-      $("#turn-sum2").text("Player Two Current Turn Sum: " + this.tempTurnSum);
+      $("#turn-sum2").text("Player Two Current Turn Sum: " + playerTwo.tempTurnSum);
       $("#turn-sum1").text("");
    }
 

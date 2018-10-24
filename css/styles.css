@@ -9,3 +9,7 @@ body {
 .green {
   color: green;
 }
+
+.red-bg {
+  background-color: red;
+}

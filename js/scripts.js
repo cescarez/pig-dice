@@ -52,6 +52,25 @@ var playingAgain = function () {
   $("#play-again").hide();
 }
 
+var changetoPlayerOne = function() {
+  $("#player-two-title").addClass("blue");
+  $("#player-one-title").removeClass();
+  $("#total-sum1").text("Player One Total Held Sum: " + playerOne.totalHeldSum);
+}
+
+var changetoPlayerTwo = function() {
+  $("#player-one-title").addClass("blue");
+  $("#player-two-title").removeClass();
+  $("#total-sum2").text("Player Two Total Held Sum: " + playerTwo.totalHeldSum);
+}
+
+var difficultySelected = function () {
+  $("#difficulty-select").hide();
+   $("#game-hidden").show();
+   $("#player-one-title").text("Human Player");
+   $("#player-two-title").text("Computer Player");
+}
+
 //user logic
 $(document).ready(function() {
   $("#human-opponent").click (function(){
@@ -59,6 +78,7 @@ $(document).ready(function() {
     $("#opponent-select").hide();
     $("#player-one-title").text("Player One");
     $("#player-two-title").text("Player Two");
+
     var playerOne = new Player();
     var playerTwo = new Player();
 
@@ -106,16 +126,12 @@ $(document).ready(function() {
 
       if (currentPlayer % 2 === 0) {
         playerOne.addTurntoHeld(turnSum);
-        $("#player-two-title").addClass("blue");
-        $("#player-one-title").removeClass();
+        changetoPlayerOne();
         console.log("Add turn sum to player 1");
-        $("#total-sum1").text("Player One Total Held Sum: " + playerOne.totalHeldSum);
       } else if (currentPlayer % 2 !== 0) {
         playerTwo.addTurntoHeld(turnSum);
-        $("#player-one-title").addClass("blue");
-        $("#player-two-title").removeClass();
+        changetoPlayerTwo();
         console.log("Add turn sum to player 2");
-        $("#total-sum2").text("Player Two Total Held Sum: " + playerTwo.totalHeldSum);
       }
 
       turnSum = 0;
@@ -137,10 +153,7 @@ $(document).ready(function() {
  });
 //after user chooses EASY difficulty
 $("#easy-difficulty").click (function(){
-  $("#difficulty-select").hide();
-   $("#game-hidden").show();
-   $("#player-one-title").text("Human Player");
-   $("#player-two-title").text("Computer Player");
+  difficultySelected();
 
    var playerOne = new Player();
    var playerComp = new Player();

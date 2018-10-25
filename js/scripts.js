@@ -19,7 +19,14 @@ Player.prototype.addTurntoHeld = function(turnSum) {
     $("#sentence-output").addClass("green").text("You're the winner!")
     $("#play-again").show();
   }
+}
 
+Player.prototype.reset = function() {
+  this.currentRoll = 0;
+  this.tempTurnSum = 0;
+  this.totalHeldSum = 0;
+  currentPlayer = 1;
+  turnSum = 0;
 }
 
 Array.prototype.randomRoll = function () {
@@ -29,6 +36,21 @@ Array.prototype.randomRoll = function () {
 var dice = [1, 2, 3, 4, 5, 6];
 var currentPlayer = 1;
 var turnSum = 0;
+
+var playingAgain = function () {
+  $("#opponent-select").show();
+  $("#game-hidden").hide();
+  $("#sentence-output").removeClass().text("")
+  $("#player-one-title").addClass("blue");
+  $("#player-two-title").removeClass();
+  $("#turn-sum1").text("");
+  $("#turn-sum2").text("");
+  $("#output1").text("");
+  $("#output2").text("");
+  $("#total-sum1").text("");
+  $("#total-sum2").text("");
+  $("#play-again").hide();
+}
 
 //user logic
 $(document).ready(function() {
@@ -97,6 +119,12 @@ $(document).ready(function() {
       }
 
       turnSum = 0;
+  });
+  //play again functionality after player win
+  $("#play-again").click(function(){
+    playerOne.reset();
+    playerTwo.reset();
+    playingAgain();
   });
  });
 
@@ -187,16 +215,5 @@ $("#easy-difficulty").click (function(){
      turnSum = 0;
    });
  });
- $("#play-again").click(function(){
-   $("#opponent-select").show();
-   $("#game-hidden").hide();
-   $("#sentence-output").removeClass().text("")
-   $("#player-one-title").addClass("blue");
-   $("#player-two-title").removeClass();
-   $("#turn-sum1").text("");
-   $("#turn-sum2").text("");
-   $("#output1").text("");
-   $("#output2").text("");
-   $("#play-again").hide();
- })
+
 });

@@ -136,7 +136,7 @@ $("#easy-difficulty").click (function(){
        playerOne.checkRoll(playerOne.currentRoll, turnSum);
        $("#output1").text(playerOne.currentRoll);
        $("#turn-sum1").text("Player One Current Turn Sum: " + playerOne.tempTurnSum);
-       $("#turn-sum2").text("");
+       $("#turn-sum2").text("Player Two Current Turn Sum: 0");
      } else if (currentPlayer % 2 === 0) {
        //doesn't currently work
         while (rollCount < 2) {
@@ -146,7 +146,7 @@ $("#easy-difficulty").click (function(){
           playerComp.checkRoll(playerComp.currentRoll, turnSum);
           $("#output2").text(playerComp.currentRoll);
           $("#turn-sum2").text("Computer Current Turn Sum: " + playerComp.tempTurnSum);
-          $("#turn-sum1").text("");
+          $("#turn-sum1").text("Player One Current Turn Sum: 0");
         }
         rollCount = 0;
         playerComp.addTurntoHeld(turnSum);
@@ -159,6 +159,8 @@ $("#easy-difficulty").click (function(){
    });
    //after user chooses to hold
    $("#hold").click(function() {
+     $("#turn-sum1").text("Player One Current Turn Sum: 0");
+     $("#turn-sum2").text("Player Two Current Turn Sum: 0");
      $("#sentence-output").removeClass().text("")
      $("#turn-sum1").text("");
      $("#turn-sum2").text("");
@@ -195,5 +197,6 @@ $("#easy-difficulty").click (function(){
    $("#turn-sum2").text("");
    $("#output1").text("");
    $("#output2").text("");
+   $("#play-again").hide();
  })
 });

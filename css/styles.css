@@ -4,6 +4,8 @@ body {
 
 .blue {
   color: blue;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 .green {
@@ -12,4 +14,8 @@ body {
 
 .red-bg {
   background-color: red;
+}
+
+#game-hidden {
+  display: none;
 }

@@ -7,7 +7,6 @@ function Player() {
 Player.prototype.checkRoll = function(currentRoll, turnSum) {
   if (currentRoll === 1) {
     this.tempTurnSum = 0;
-    $("#sentence-output").text("You lose your turn points! " + currentRoll + " :(");
   } else {
     this.tempTurnSum = turnSum;
     console.log(this.tempTurnSum);
@@ -32,10 +31,15 @@ var turnSum = 0;
 
 //user logic
 $(document).ready(function() {
+  $("p").click (function(){
+    $("#game-hidden").show();
+    $("#opponent-select").hide();
+  })
+
   var playerOne = new Player();
-  var playerTwo = new Player()
-  $("#roll").click(function(event) {
-    event.preventDefault();
+  var playerTwo = new Player();
+
+  $("#roll").click(function() {
     $("#sentence-output").removeClass().text("")
     var currentRoll = dice.randomRoll();
 //entire section to be refactored
@@ -59,10 +63,9 @@ $(document).ready(function() {
       $("#output2").text(playerTwo.currentRoll);
       $("#turn-sum2").text("Player Two Current Turn Sum: " + playerTwo.tempTurnSum);
       $("#turn-sum1").text("");
-   }
+    }
   });
-  $("#hold").click(function(event) {
-    event.preventDefault();
+  $("#hold").click(function() {
     $("#turn-sum1").text("");
     $("#turn-sum2").text("");
     $("#output1").text("");
@@ -71,7 +74,7 @@ $(document).ready(function() {
     currentPlayer += 1;
 
     console.log("Current player count: " + currentPlayer);
-    console.log("Current player mod 2: " + currentPlayer%2);
+    console.log("Current player mod 2: " + currentPlayer % 2);
 
     if (currentPlayer % 2 === 0) {
       playerOne.addTurntoHeld(turnSum);

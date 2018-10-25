@@ -15,20 +15,25 @@
     <div class="row">
       <h1>Pig Dice</h1>
     </div>
+    <div class="row" id="difficulty-select">
+      <p>Select a difficulty:</p>
+      <p class="btn btn-success" id="easy-difficulty">Easy</p>
+      <p class="btn btn-danger" id="hard-difficulty">Challenge</p>
+    </div>
     <div id="game-hidden">
       <div class="row">
-        <p>How to play:</p>
-        <p>The current player (bold and in blue) rolls. After each roll, the player has the choice to either roll again or "hold" and bank the sum of all the rolls for the current turn. If the player holds, it is the next player's turn. If a "1" is rolled at any time, all of the points collected for the current turn are lost and it is the next player's turn. The two players take turns until one player has banked 100 points.</p>
+        <p><strong>How to play:</strong></p>
+        <p> <em>The current player (bold and in blue) rolls. After each roll, the player has the choice to either roll again or "hold" and bank the sum of all the rolls for the current turn. If the player holds, it is the next player's turn. If a "1" is rolled at any time, all of the points collected for the current turn are lost and it is the next player's turn. The two players take turns until one player has banked 100 points.</em></p>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <h2 id="player-one-title" class="blue">Player One</h2>
+          <h2 id="player-one-title" class="blue"></h2>
           <h2 id="output1"></h2>
           <p id="turn-sum1"></p>
           <p id="total-sum1"></p>
         </div>
         <div class="col-md-6">
-          <h2 id="player-two-title">Player Two</h2>
+          <h2 id="player-two-title"></h2>
           <h2 id="output2"></h2>
           <p id="turn-sum2"></p>
           <p id="total-sum2"></p>
@@ -43,8 +48,8 @@
     </div>
     <div class="row" id="opponent-select">
       <h3>First, select your opponent:</h3>
-      <p class="btn btn-info" class="opponent">Human</p>
-      <p class="btn btn-info" class="opponent">Computer</p>
+      <p class="btn btn-info" class="opponent" id="human-opponent">Human</p>
+      <p class="btn btn-info" class="opponent" id="computer-opponent">Computer</p>
     </div>
   </div>
 </body>

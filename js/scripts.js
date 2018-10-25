@@ -31,65 +31,142 @@ var turnSum = 0;
 
 //user logic
 $(document).ready(function() {
-  $("p").click (function(){
+  $("#human-opponent").click (function(){
     $("#game-hidden").show();
     $("#opponent-select").hide();
-  })
+    $("#player-one-title").text("Player One");
+    $("#player-two-title").text("Player Two");
+    var playerOne = new Player();
+    var playerTwo = new Player();
 
-  var playerOne = new Player();
-  var playerTwo = new Player();
-
-  $("#roll").click(function() {
-    $("#sentence-output").removeClass().text("")
-    var currentRoll = dice.randomRoll();
-//entire section to be refactored
-    if (currentRoll === 1) {
-      turnSum = 0;
-      $("#sentence-output").addClass("red-bg").text("You lose your turn points! :( Next player's turn!");
-    } else {
-      turnSum += currentRoll;
-    }
-    if (currentPlayer % 2 !== 0) {
-      console.log("playerone");
-      playerOne.currentRoll = currentRoll;
-      playerOne.checkRoll(playerOne.currentRoll, turnSum);
-      $("#output1").text(playerOne.currentRoll);
-      $("#turn-sum1").text("Player One Current Turn Sum: " + playerOne.tempTurnSum);
-      $("#turn-sum2").text("");
-    } else if (currentPlayer % 2 === 0) {
-      console.log("playerTwo");
-      playerTwo.currentRoll = currentRoll;
-      playerTwo.checkRoll(playerTwo.currentRoll, turnSum);
-      $("#output2").text(playerTwo.currentRoll);
-      $("#turn-sum2").text("Player Two Current Turn Sum: " + playerTwo.tempTurnSum);
+    $("#roll").click(function() {
+      $("#sentence-output").removeClass().text("")
+      var currentRoll = dice.randomRoll();
+  //after user chooses to roll...entire section to be refactored
+      if (currentRoll === 1) {
+        turnSum = 0;
+        $("#sentence-output").addClass("red-bg").text("You lose your turn points! :( Next player's turn!");
+      } else {
+        turnSum += currentRoll;
+      }
+      if (currentPlayer % 2 !== 0) {
+        console.log("playerone");
+        playerOne.currentRoll = currentRoll;
+        playerOne.checkRoll(playerOne.currentRoll, turnSum);
+        $("#output1").text(playerOne.currentRoll);
+        $("#turn-sum1").text("Player One Current Turn Sum: " + playerOne.tempTurnSum);
+        $("#turn-sum2").text("");
+      } else if (currentPlayer % 2 === 0) {
+        console.log("playerTwo");
+        playerTwo.currentRoll = currentRoll;
+        playerTwo.checkRoll(playerTwo.currentRoll, turnSum);
+        $("#output2").text(playerTwo.currentRoll);
+        $("#turn-sum2").text("Player Two Current Turn Sum: " + playerTwo.tempTurnSum);
+        $("#turn-sum1").text("");
+      }
+    });
+    //after user chooses to hold
+    $("#hold").click(function() {
       $("#turn-sum1").text("");
-    }
+      $("#turn-sum2").text("");
+      $("#output1").text("");
+      $("#output2").text("");
+
+      currentPlayer += 1;
+
+      console.log("Current player count: " + currentPlayer);
+      console.log("Current player mod 2: " + currentPlayer % 2);
+
+      if (currentPlayer % 2 === 0) {
+        playerOne.addTurntoHeld(turnSum);
+        $("#player-two-title").addClass("blue");
+        $("#player-one-title").removeClass();
+        console.log("Add turn sum to player 1");
+        $("#total-sum1").text("Player One Total Held Sum: " + playerOne.totalHeldSum);
+      } else if (currentPlayer % 2 !== 0) {
+        playerTwo.addTurntoHeld(turnSum);
+        $("#player-one-title").addClass("blue");
+        $("#player-two-title").removeClass();
+        console.log("Add turn sum to player 2");
+        $("#total-sum2").text("Player Two Total Held Sum: " + playerTwo.totalHeldSum);
+      }
+
+      turnSum = 0;
   });
-  $("#hold").click(function() {
-    $("#turn-sum1").text("");
-    $("#turn-sum2").text("");
-    $("#output1").text("");
-    $("#output2").text("");
-
-    currentPlayer += 1;
-
-    console.log("Current player count: " + currentPlayer);
-    console.log("Current player mod 2: " + currentPlayer % 2);
-
-    if (currentPlayer % 2 === 0) {
-      playerOne.addTurntoHeld(turnSum);
-      $("#player-two-title").addClass("blue");
-      $("#player-one-title").removeClass();
-      console.log("Add turn sum to player 1");
-      $("#total-sum1").text("Player One Total Held Sum: " + playerOne.totalHeldSum);
-    } else if (currentPlayer % 2 !== 0) {
-      playerTwo.addTurntoHeld(turnSum);
-      $("#player-one-title").addClass("blue");
-      $("#player-two-title").removeClass();
-      console.log("Add turn sum to player 2");
-      $("#total-sum2").text("Player Two Total Held Sum: " + playerTwo.totalHeldSum);
-    }
-
-    turnSum = 0;
  });
+
+//*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+//COMPUTER OPPONENT.. heck redundant but let's get it working first
+//*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
+ $("#computer-opponent").click (function(){
+   $("#opponent-select").hide();
+   $("#difficulty-select").show();
+ });
+//after user chooses EASY difficulty
+$("#easy-difficulty").click (function(){
+  $("#difficulty-select").hide();
+   $("#game-hidden").show();
+   $("#player-one-title").text("Human Player");
+   $("#player-two-title").text("Computer Player");
+
+   var playerOne = new Player();
+   var playerComp = new Player();
+
+   $("#roll").click(function() {
+     $("#sentence-output").removeClass().text("")
+     var currentRoll = dice.randomRoll();
+
+     //after uesr chooses to roll...entire section to be refactored
+     if (currentRoll === 1) {
+       turnSum = 0;
+       $("#sentence-output").addClass("red-bg").text("You lose your turn points! :( Next player's turn!");
+     } else {
+       turnSum += currentRoll;
+     }
+
+     if (currentPlayer % 2 !== 0) {
+       console.log("playerone");
+       playerOne.currentRoll = currentRoll;
+       playerOne.checkRoll(playerOne.currentRoll, turnSum);
+       $("#output1").text(playerOne.currentRoll);
+       $("#turn-sum1").text("Player One Current Turn Sum: " + playerOne.tempTurnSum);
+       $("#turn-sum2").text("");
+     } else if (currentPlayer % 2 === 0) {
+       console.log("playerTwo");
+       playerTwo.currentRoll = currentRoll;
+       playerTwo.checkRoll(playerTwo.currentRoll, turnSum);
+       $("#output2").text(playerTwo.currentRoll);
+       $("#turn-sum2").text("Player Two Current Turn Sum: " + playerTwo.tempTurnSum);
+       $("#turn-sum1").text("");
+     }
+   });
+   //after user chooses to hold
+   $("#hold").click(function() {
+     $("#turn-sum1").text("");
+     $("#turn-sum2").text("");
+     $("#output1").text("");
+     $("#output2").text("");
+
+     currentPlayer += 1;
+
+     console.log("Current player count: " + currentPlayer);
+     console.log("Current player mod 2: " + currentPlayer % 2);
+
+     if (currentPlayer % 2 === 0) {
+       playerOne.addTurntoHeld(turnSum);
+       $("#player-two-title").addClass("blue");
+       $("#player-one-title").removeClass();
+       console.log("Add turn sum to player 1");
+       $("#total-sum1").text("Player One Total Held Sum: " + playerOne.totalHeldSum);
+     } else if (currentPlayer % 2 !== 0) {
+       playerTwo.addTurntoHeld(turnSum);
+       $("#player-one-title").addClass("blue");
+       $("#player-two-title").removeClass();
+       console.log("Add turn sum to player 2");
+       $("#total-sum2").text("Player Two Total Held Sum: " + playerTwo.totalHeldSum);
+     }
+
+     turnSum = 0;
+ });
+});
 });

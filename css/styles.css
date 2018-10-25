@@ -16,6 +16,6 @@ body {
   background-color: red;
 }
 
-#game-hidden {
+#game-hidden, #difficulty-select {
   display: none;
 }

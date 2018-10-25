@@ -30,26 +30,27 @@
           <h2 id="player-one-title" class="blue"></h2>
           <h2 id="output1"></h2>
           <p id="turn-sum1"></p>
-          <p id="total-sum1"></p>
+          <p id="total-sum1" class="total-sum"></p>
         </div>
         <div class="col-md-6">
           <h2 id="player-two-title"></h2>
           <h2 id="output2"></h2>
           <p id="turn-sum2"></p>
-          <p id="total-sum2"></p>
+          <p id="total-sum2" class="total-sum"></p>
         </div>
       </div>
       <div class="row">
-        <h3>Click here to generate a number beetween "1-6"</h3>
+        <h3>Click here to generate a number between "1-6"</h3>
         <p class="btn btn-success" id="roll">Roll</p>
         <p class="btn btn-danger" id="hold">Hold</p>
         <h4 id="sentence-output"></h4>
+        <p id="play-again" class="btn btn-default">Play Again</p>
       </div>
     </div>
     <div class="row" id="opponent-select">
-      <h3>First, select your opponent:</h3>
-      <p class="btn btn-info" class="opponent" id="human-opponent">Human</p>
-      <p class="btn btn-info" class="opponent" id="computer-opponent">Computer</p>
+      <h3>Select your opponent:</h3>
+      <p class="btn btn-info" id="human-opponent">Human</p>
+      <p class="btn btn-info" id="computer-opponent">Computer</p>
     </div>
   </div>
 </body>

@@ -14,8 +14,13 @@ body {
 
 .red-bg {
   background-color: red;
+  color: white;
 }
 
-#game-hidden, #difficulty-select {
+#game-hidden, #difficulty-select, #play-again {
   display: none;
+}
+
+.total-sum {
+  font-weight: bold;
 }
